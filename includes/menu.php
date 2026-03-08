@@ -2,12 +2,6 @@
 $current_page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 
 $menu_items = array(
-    'dashboard' => array(
-        'icon' => 'fas fa-home',
-        'title' => 'Dashboard',
-        'link' => 'index.php?page=dashboard',
-        'active' => ($current_page == 'dashboard')
-    ),
     'data_barang' => array(
         'icon' => 'fas fa-box',
         'title' => 'Data Barang',
@@ -34,11 +28,6 @@ $menu_items = array(
 </a>
 
 <?php endforeach; ?>
-
-<a href="logout.php" class="nav-item logout">
-    <i class="fas fa-sign-out-alt"></i>
-    <span>Keluar</span>
-</a>
 
 </div>
 
