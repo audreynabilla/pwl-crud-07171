@@ -62,6 +62,14 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                     </td>
 
                     <td>
+                    <?php echo htmlspecialchars($row['kategori_id']); ?>
+                    </td>
+
+                    <td class="harga">
+                        Rp <?php echo number_format($row['harga'],0,",","."); ?>
+                    </td>
+
+                    <td>
                         <?php
                         $class = "stok-normal";
 
@@ -76,10 +84,6 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                         <span class="stok-badge <?php echo $class; ?>">
                             <?php echo $row['stok']; ?>
                         </span>
-                    </td>
-
-                    <td class="harga">
-                        Rp <?php echo number_format($row['harga'],0,",","."); ?>
                     </td>
 
                     <td class="aksi">
