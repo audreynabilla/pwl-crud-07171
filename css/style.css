@@ -10,6 +10,11 @@ body{
     color:#393D7E;
 }
 
+.container{
+    max-width:1100px;
+    margin:auto;
+}
+
 
 /*header*/
 
@@ -127,9 +132,10 @@ body{
 
 .table-card{
     background:white;
-    border-radius:15px;
+    border-radius:16px;
     padding:25px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.05);
+    box-shadow:0 8px 25px rgba(0,0,0,0.06);
+    margin-top:20px;
 }
 
 .table-header{
@@ -158,6 +164,11 @@ body{
     border-radius:8px;
     text-decoration:none;
     font-size:14px;
+    transition:0.2s;
+}
+
+.btn-primary:hover{
+    background:#57b1a8;
 }
 
 .btn-outline{
@@ -167,6 +178,12 @@ body{
     border-radius:8px;
     background:white;
     cursor:pointer;
+    transition:0.2s;
+}
+
+.btn-outline:hover{
+    background:#5459AC;
+    color:white;
 }
 
 
@@ -183,33 +200,41 @@ body{
 
 .inventory-table th{
     background:#f4f6fb;
-    padding:12px;
+    padding:14px 16px;
     text-align:left;
+    font-weight:600;
 }
 
 .inventory-table td{
-    padding:12px;
+    padding:14px 16px;
     border-bottom:1px solid #eee;
+}
+
+.inventory-table tr:hover{
+    background:#fafbff;
 }
 
 /*button*/
 
 .aksi{
     display:flex;
-    gap:8px;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
 }
 
 .btn-edit,
 .btn-delete,
 .btn-view{
-    width:30px;
-    height:30px;
+    width:36px;
+    height:36px;
     display:flex;
     align-items:center;
     justify-content:center;
-    border-radius:6px;
+    border-radius:10px;
     color:white;
     text-decoration:none;
+    transition:0.2s;
 }
 
 .btn-edit{
@@ -222,6 +247,18 @@ body{
 
 .btn-view{
     background:#6DC3BB;
+}
+
+.btn-edit:hover{
+    transform:scale(1.05);
+}
+
+.btn-delete:hover{
+    transform:scale(1.05);
+}
+
+.btn-view:hover{
+    transform:scale(1.05);
 }
 
 
@@ -241,10 +278,11 @@ body{
 /*tambah php*/
 .card{
     background:white;
-    border-radius:14px;
-    padding:25px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.05);
-    margin:30px;
+    border-radius:16px;
+    padding:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+    margin:30px auto;
+    max-width:900px;
 }
 
 .card-header{
@@ -331,4 +369,13 @@ body{
 
 .btn-secondary:hover{
     background:#ddd;
+}
+
+.page-header{
+    max-width:900px;
+    margin:30px auto;
+    text-align:center;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
 }

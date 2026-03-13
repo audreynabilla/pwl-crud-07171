@@ -9,21 +9,6 @@
 </head>
 <body>
     <div class="container">
-        <header class="header">
-            <div class="header-left">
-                <div class="logo">
-                    <i class="fas fa-boxes"></i>
-                    <h1>Sistem Manajemen Inventaris</h1>
-                </div>
-            </div>
-            <div class="header-right">
-                <div class="date-time">
-                    <i class="fas fa-clock"></i>
-                    <span id="current-date"><?php echo date('d/m/Y'); ?></span>
-                </div>
-            </div>
-        </header>
-
         <?php if(isset($_SESSION['pesan'])): ?>
         <div class="notification <?php echo $_SESSION['tipe']; ?>">
             <div class="notification-content">
@@ -39,3 +24,4 @@
         unset($_SESSION['tipe']);
         endif; 
         ?>
+    

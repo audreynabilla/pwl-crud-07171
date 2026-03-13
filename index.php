@@ -8,14 +8,12 @@
 ?>
 
 <div class="content-wrapper">
-<?php include 'includes/menu.php'; ?>
 
     <main class="main-content">
         <div class="page-header">
 
         <?php
         $page_titles = array(
-            'dashboard' => 'Dashboard',
             'data_barang' => 'Data Barang',
             'tambah' => 'Tambah Barang',
             'edit' => 'Edit Barang',
@@ -24,12 +22,6 @@
         ?>
 
         <h2><?php echo $page_titles[$page] ?? 'Dashboard'; ?></h2>
-
-        <div class="breadcrumb">
-            <a href="index.php">Home</a>
-            <i class="fas fa-chevron-right"></i>
-            <span><?php echo $page_titles[$page] ?? 'Dashboard'; ?></span>
-        </div>
 
         </div>
 

@@ -53,13 +53,10 @@
 <?php include 'includes/header.php'; ?>
 
 <div class="content-wrapper">
-	<?php include 'includes/menu.php'; ?>
 	<main class="main-content">
 		<div class="page-header">
 			<h2>Tambah Produk Baru</h2>
 			<div class="breadcrumb">
-				<a href="index.php">Home</a>
-				<i class="fas fa-chevron-right"></i>
 				<a href="index.php?page=data_barang">Data Barang</a>
 				<i class="fas fa-chevron-right"></i>
 				<span>Tambah Produk</span>
@@ -104,11 +101,11 @@
 									<i class="fas fa-tags"></i> Kategori *
 								</label>
 								<select name="kategori_id" required>
-									<option value="">Pilih Kategori</option>
-									<option value="1">Aksesoris</option>
-									<option value="2">Pakaian</option>
-									<option value="3">Sepatu</option>
-									<option value="4">Perhiasan</option>
+									<option>Pilih Kategori</option>
+									<option>Aksesoris</option>
+									<option>Pakaian</option>
+									<option>Sepatu</option>
+									<option>Perhiasan</option>
 								</select>
 							</div>
 						</div>
@@ -152,4 +149,3 @@
 	</main>
 </div>
 
-<?php include 'includes/footer.php'; ?>

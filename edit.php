@@ -51,13 +51,10 @@
 
 <?php include 'includes/header.php'; ?>
 <div class="content-wrapper">
-	<?php include 'includes/menu.php'; ?>
 	<main class="main-content">
 		<div class="page-header">
 			<h2>Edit Produk</h2>
 			<div class="breadcrumb">
-				<a href="index.php">Home</a>
-				<i class="fas fa-chevron-right"></i>
 				<a href="index.php?page=data_barang">Data Barang</a>
 				<i class="fas fa-chevron-right"></i>
 				<span>Edit Produk</span>
@@ -157,4 +154,3 @@
 	</main>
 </div>
 
-<?php include 'includes/footer.php'; ?>
