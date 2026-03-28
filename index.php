@@ -3,9 +3,10 @@
     $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 ?>
 
-<?php 
-    include 'includes/header.php'; 
-?>
+<?php include 'includes/header.php'; ?>
+
+<?php include 'includes/menu.php'; ?>
+
 
 <div class="content-wrapper">
 
