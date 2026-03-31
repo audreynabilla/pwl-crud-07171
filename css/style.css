@@ -432,3 +432,353 @@ body{
 .nav-item i{
     font-size:14px;
 }
+
+/*LOGIN*/
+.login-body{
+    background:linear-gradient(135deg,#393D7E,#5459AC);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login-wrapper{
+    width:100%;
+    max-width:420px;
+    padding:20px;
+}
+
+.login-card{
+    background:white;
+    border-radius:16px;
+    box-shadow:0 15px 35px rgba(57,61,126,0.25);
+    overflow:hidden;
+}
+
+.login-header{
+    background:linear-gradient(135deg,#6DC3BB,#5459AC);
+    color:white;
+    text-align:center;
+    padding:30px 20px;
+}
+
+.login-header i{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.login-header h2{
+    font-size:22px;
+    margin-bottom:6px;
+}
+
+.login-header p{
+    font-size:14px;
+    opacity:0.9;
+}
+
+.login-form{
+    padding:30px;
+}
+
+.login-error{
+    background:#FCE8ED;
+    color:#C84A63;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:18px;
+    text-align:center;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    font-size:14px;
+    font-weight:600;
+    color:#393D7E;
+    margin-bottom:6px;
+    display:block;
+}
+
+.form-group input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:14px;
+    transition:0.2s;
+}
+
+.form-group input:focus{
+    border-color:#6DC3BB;
+    outline:none;
+    box-shadow:0 0 0 2px rgba(109,195,187,0.2);
+}
+
+.btn-login{
+    width:100%;
+    padding:12px;
+    background:#6DC3BB;
+    border:none;
+    border-radius:10px;
+    color:white;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.2s;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+}
+
+.btn-login:hover{
+    background:#57b1a8;
+    transform:translateY(-1px);
+}
+
+/*COOKIE*/
+.remember-me{
+    margin-bottom:15px;
+    font-size:14px;
+    color:#393D7E;
+}
+
+.remember-me label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    cursor:pointer;
+}
+
+.remember-me input{
+    width:16px;
+    height:16px;
+}
+
+/*register*/
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:"Segoe UI",sans-serif;
+}
+
+.register-body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+
+background: linear-gradient(
+135deg,
+#393D7E,
+#393D7E
+);
+
+}
+
+/* CARD */
+
+.register-card{
+
+width:380px;
+
+background:white;
+
+border-radius:14px;
+
+overflow:hidden;
+
+box-shadow:0 15px 35px rgba(0,0,0,0.2);
+
+}
+
+/* HEADER */
+
+.register-header{
+
+text-align:center;
+
+padding:35px 25px;
+
+color:white;
+
+background: linear-gradient(
+135deg,
+#5fa8a3,
+#5b6cb8
+);
+
+}
+
+.register-header i{
+
+font-size:32px;
+
+margin-bottom:12px;
+
+}
+
+.register-header h2{
+
+font-size:22px;
+
+margin-bottom:6px;
+
+}
+
+.register-header p{
+
+font-size:14px;
+
+opacity:0.9;
+
+}
+
+/* FORM */
+
+.register-form{
+
+padding:25px;
+
+}
+
+.form-group{
+
+margin-bottom:16px;
+
+}
+
+.form-group label{
+
+display:block;
+
+margin-bottom:6px;
+
+font-weight:500;
+
+color:#333;
+
+}
+
+.form-group input{
+
+width:100%;
+
+padding:12px;
+
+border-radius:8px;
+
+border:1px solid #ddd;
+
+font-size:14px;
+
+background:#eef2f7;
+
+}
+
+.form-group input:focus{
+
+outline:none;
+
+border-color:#5b6cb8;
+
+}
+
+/* BUTTON */
+
+.btn-register{
+
+width:100%;
+
+padding:13px;
+
+border:none;
+
+border-radius:10px;
+
+background:#66b2a6;
+
+color:white;
+
+font-size:15px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:0.2s;
+
+}
+
+.btn-register:hover{
+
+background:#5aa59a;
+
+}
+
+/* MESSAGE */
+
+.register-error{
+
+background:#ffe5e5;
+
+color:#d8000c;
+
+padding:10px;
+
+border-radius:6px;
+
+margin-bottom:14px;
+
+text-align:center;
+
+}
+
+.register-success{
+
+background:#e6ffed;
+
+color:#0a7a36;
+
+padding:10px;
+
+border-radius:6px;
+
+margin-bottom:14px;
+
+text-align:center;
+
+}
+
+/* FOOTER */
+
+.register-footer{
+
+text-align:center;
+
+margin-top:12px;
+
+font-size:14px;
+
+}
+
+.register-footer a{
+
+color:#5b6cb8;
+
+text-decoration:none;
+
+font-weight:500;
+
+}
+
+.register-footer a:hover{
+
+text-decoration:underline;
+
+}
