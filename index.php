@@ -1,4 +1,15 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit;
+}
+
+include 'koneksi.php';
+?>
+
+<?php
     $page_title = "Dashboard";
     $page = isset($_GET['page']) ? $_GET['page'] : 'dashboard';
 ?>

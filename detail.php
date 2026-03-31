@@ -1,4 +1,15 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit;
+}
+
+include 'koneksi.php';
+?>
+
+<?php
 	include 'koneksi.php';
 	$page_title = "Detail Produk";
 	$id = isset($_GET['id']) ? intval($_GET['id']) : 0;

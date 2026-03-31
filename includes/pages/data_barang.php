@@ -1,4 +1,14 @@
 <?php
+
+if (!isset($_SESSION['username'])) {
+    header("Location: login.php");
+    exit;
+}
+
+include 'koneksi.php';
+?>
+
+<?php
 include __DIR__ . '/../../koneksi.php';
 
 $query = $conn->query("SELECT * FROM produk ORDER BY id DESC");
