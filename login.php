@@ -4,6 +4,7 @@
 
 	$error = '';
 
+	// Ambil username dari cookie jika ada
 	$username_cookie = '';
 
 	if (isset($_COOKIE['username'])) {
@@ -15,7 +16,9 @@
 		$username = trim($_POST['username']);
 		$password = trim($_POST['password']);
 
-		$stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+		$stmt = $conn->prepare(
+			"SELECT * FROM users WHERE username = ?"
+		);
 		$stmt->execute([$username]);
 
 		$user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -24,30 +27,28 @@
 
 			if (password_verify($password, $user['password'])) {
 
-				$_SESSION['user_id']      = $user['id'];
-				$_SESSION['username']     = $user['username'];
-				$_SESSION['nama_lengkap'] = $user['nama_lengkap'];
+				$_SESSION['user_id']  = $user['id'];
+				$_SESSION['username'] = $user['username'];
 
-				if (isset($_POST['remember'])) {
+			if (isset($_POST['remember'])) {
 
-					setcookie(
-						"username",
-						$username,
-						time() + (86400 * 7),
-						"/"
-					);
+				setcookie(
+					"username",
+					$username,
+					time() + 10,
+					"/"
+				);
 
-				} else {
+			} else {
 
-					setcookie(
-						"username",
-						"",
-						time() - 3600,
-						"/"
-					);
+				setcookie(
+					"username",
+					"",
+					time() - 3600,
+					"/"
+				);
 
-				}
-
+			}
 				header("Location: index.php?page=data_barang");
 				exit();
 
@@ -104,7 +105,7 @@
 					<input
 						type="text"
 						name="username"
-						value="<?php echo htmlspecialchars($username_cookie); ?>"
+						value="<?php echo isset($_COOKIE['username']) ? htmlspecialchars($_COOKIE['username']) : ''; ?>"
 						required
 					>
 				</div>
