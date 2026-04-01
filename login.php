@@ -1,140 +1,145 @@
 <?php
-session_start();
-include 'koneksi.php';
+	session_start();
+	include 'koneksi.php';
 
-$error = '';
+	$error = '';
 
-// Ambil username dari cookie jika ada
-$username_cookie = '';
-if (isset($_COOKIE['username'])) {
-    $username_cookie = $_COOKIE['username'];
-}
+	$username_cookie = '';
 
-// Proses saat form disubmit
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+	if (isset($_COOKIE['username'])) {
+		$username_cookie = $_COOKIE['username'];
+	}
 
-    $username = trim($_POST['username']);
-    $password = trim($_POST['password']);
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    // Cek username di database
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
-    $stmt->execute([$username]);
+		$username = trim($_POST['username']);
+		$password = trim($_POST['password']);
 
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+		$stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+		$stmt->execute([$username]);
 
-    if ($user) {
+		$user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Verifikasi password
-        if (password_verify($password, $user['password'])) {
+		if ($user) {
 
-            // Simpan session
-            $_SESSION['user_id']      = $user['id'];
-            $_SESSION['username']     = $user['username'];
-            $_SESSION['nama_lengkap'] = $user['nama_lengkap'];
+			if (password_verify($password, $user['password'])) {
 
-            // Remember Me
-            if (isset($_POST['remember'])) {
-                setcookie(
-                    "username",
-                    $username,
-                    time() + (86400 * 7), // 7 hari
-                    "/"
-                );
-            } else {
-                setcookie(
-                    "username",
-                    "",
-                    time() - 3600,
-                    "/"
-                );
-            }
+				$_SESSION['user_id']      = $user['id'];
+				$_SESSION['username']     = $user['username'];
+				$_SESSION['nama_lengkap'] = $user['nama_lengkap'];
 
-            // Redirect ke halaman data barang
-            header("Location: index.php?page=data_barang");
-            exit();
+				if (isset($_POST['remember'])) {
 
-        } else {
-            $error = "Password salah!";
-        }
+					setcookie(
+						"username",
+						$username,
+						time() + (86400 * 7),
+						"/"
+					);
 
-    } else {
-        $error = "Username tidak ditemukan!";
-    }
-}
+				} else {
+
+					setcookie(
+						"username",
+						"",
+						time() - 3600,
+						"/"
+					);
+
+				}
+
+				header("Location: index.php?page=data_barang");
+				exit();
+
+			} else {
+
+				$error = "Password salah!";
+
+			}
+
+		} else {
+
+			$error = "Username tidak ditemukan!";
+
+		}
+	}
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Sistem Inventaris</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login Sistem Inventaris</title>
 
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/login.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/login.css">
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body class="login-body">
 
-    <div class="login-wrapper">
+	<div class="login-wrapper">
 
-        <div class="login-card">
+		<div class="login-card">
 
-            <div class="login-header">
-                <i class="fa-solid fa-box"></i>
-                <h2>Sistem Manajemen Inventaris</h2>
-                <p>Silakan login untuk melanjutkan</p>
-            </div>
+			<div class="login-header">
+				<i class="fa-solid fa-box"></i>
+				<h2>Sistem Manajemen Inventaris</h2>
+				<p>Silakan login untuk melanjutkan</p>
+			</div>
 
-            <form method="POST" class="login-form">
+			<form method="POST" class="login-form">
 
-                <?php if ($error): ?>
-                    <div class="login-error">
-                        <?php echo $error; ?>
-                    </div>
-                <?php endif; ?>
+				<?php if ($error): ?>
+					<div class="login-error">
+						<?php echo $error; ?>
+					</div>
+				<?php endif; ?>
 
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text"
-                           name="username"
-                           value="<?php echo htmlspecialchars($username_cookie); ?>"
-                           required>
-                </div>
+				<div class="form-group">
+					<label>Username</label>
+					<input
+						type="text"
+						name="username"
+						value="<?php echo htmlspecialchars($username_cookie); ?>"
+						required
+					>
+				</div>
 
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password"
-                           name="password"
-                           required>
-                </div>
+				<div class="form-group">
+					<label>Password</label>
+					<input
+						type="password"
+						name="password"
+						required
+					>
+				</div>
 
-                <div class="remember-me">
-                    <label>
-                        <input type="checkbox" name="remember">
-                        Remember Me
-                    </label>
-                </div>
+				<div class="remember-me">
+					<label>
+						<input type="checkbox" name="remember">
+						Remember Me
+					</label>
+				</div>
 
-                <button type="submit" class="btn-login">
-                    <i class="fas fa-sign-in-alt"></i>
-                    Login
-                </button>
+				<button type="submit" class="btn-login">
+					<i class="fas fa-sign-in-alt"></i>
+					Login
+				</button>
 
-                <p>
-                    Belum punya akun?
-                    <a href="register.php">Daftar di sini</a>
-                </p>
+				<p>
+					Belum punya akun?
+					<a href="register.php">Daftar di sini</a>
+				</p>
 
-            </form>
+			</form>
 
-        </div>
+		</div>
 
-    </div>
+	</div>
 
 </body>
 </html>
