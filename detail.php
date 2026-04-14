@@ -109,6 +109,19 @@ include 'koneksi.php';
 									disabled
 								>
 							</div>
+
+							<div class="form-row">
+
+							<div class="form-group">
+								<label><i class="fas fa-image"></i> Gambar Produk</label>
+								<?php if ($produk['gambar'] && file_exists('uploads/' . $produk['gambar'])): ?>
+									<div>
+										<img src="uploads/<?php echo $produk['gambar']; ?>" style="max-width:200px; border-radius:8px;">
+									</div>
+								<?php else: ?>
+									<p><em>Tidak ada gambar</em></p>
+								<?php endif; ?>
+							</div>
 						</div>
 					</form>
 				</div>

@@ -7,12 +7,17 @@ if (!isset($_SESSION['username'])) {
 }
 
 include 'koneksi.php';
-?>
-
-<?php
-include 'koneksi.php';
 
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+
+// Ambil nama gambar sebelum hapus
+$stmt = $conn->prepare("SELECT gambar FROM produk WHERE id = ?");
+$stmt->execute([$id]);
+$produk = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if ($produk && !empty($produk['gambar']) && file_exists('uploads/' . $produk['gambar'])) {
+    unlink('uploads/' . $produk['gambar']);
+}
 
 $stmt = $conn->prepare("DELETE FROM produk WHERE id = ?");
 $stmt->execute([$id]);
