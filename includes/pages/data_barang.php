@@ -5,6 +5,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 include 'koneksi.php';
+include '../../csrf.php';  
 
 $query = $conn->query("SELECT * FROM produk ORDER BY id DESC");
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -62,7 +63,13 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                     </td>
                     <td class="aksi">
                         <a href="edit.php?id=<?php echo $row['id']; ?>" class="btn-edit"><i class="fas fa-pen"></i></a>
-                        <a href="hapus.php?id=<?php echo $row['id']; ?>" class="btn-delete" onclick="return confirm('Yakin hapus barang ini?')"><i class="fas fa-trash"></i></a>
+                        <form method="POST" action="hapus.php" style="display:inline;" onsubmit="return confirm('Yakin hapus barang ini?')">
+                            <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                            <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
+                            <button type="submit" class="btn-delete" style="background:none; border:none; cursor:pointer;">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>                        
                         <a href="detail.php?id=<?php echo $row['id']; ?>" class="btn-view"><i class="fas fa-eye"></i></a>
                     </td>
                 </tr>
