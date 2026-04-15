@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'csrf.php';
 
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
@@ -25,12 +26,14 @@ $error = '';
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (!isset($_POST['csrf_token']) || !validateCSRFToken($_POST['csrf_token'])) {
+        die("Akses tidak sah (CSRF)");
+    }
     $nama_produk = trim($_POST['nama_produk']);
     $kategori_id = trim($_POST['kategori_id']);
     $stok = trim($_POST['stok']);
     $harga = trim($_POST['harga']);
     
-    // ========== VALIDASI ==========
     $errors = [];
     if (empty($nama_produk)) $errors[] = "Nama produk wajib diisi.";
     if (!is_numeric($harga) || $harga < 0) $errors[] = "Harga harus angka positif.";
@@ -131,7 +134,8 @@ include 'includes/header.php';
                     <?php endif; ?>
                     
                     <form method="POST" enctype="multipart/form-data" class="form-vertical">
-                        <div class="form-row">
+                        <?php echo getCSRFField(); ?>
+                         <div class="form-row">
                             <div class="form-group">
                                 <label><i class="fas fa-barcode"></i> Kode Produk</label>
                                 <input type="text" value="<?php echo htmlspecialchars($produk['kode_produk']); ?>" readonly style="background:#f3f4f6;">

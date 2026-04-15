@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'csrf.php';
 
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
@@ -8,20 +9,33 @@ if (!isset($_SESSION['username'])) {
 
 include 'koneksi.php';
 
-$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Validasi CSRF token
+    if (!isset($_POST['csrf_token']) || !validateCSRFToken($_POST['csrf_token'])) {
+        die("Akses tidak sah (CSRF)");
+    }
 
-// Ambil nama gambar sebelum hapus
-$stmt = $conn->prepare("SELECT gambar FROM produk WHERE id = ?");
-$stmt->execute([$id]);
-$produk = $stmt->fetch(PDO::FETCH_ASSOC);
+    $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
 
-if ($produk && !empty($produk['gambar']) && file_exists('uploads/' . $produk['gambar'])) {
-    unlink('uploads/' . $produk['gambar']);
+    // Ambil nama gambar sebelum hapus
+    $stmt = $conn->prepare("SELECT gambar FROM produk WHERE id = ?");
+    $stmt->execute([$id]);
+    $produk = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($produk && !empty($produk['gambar']) && file_exists('uploads/' . $produk['gambar'])) {
+        unlink('uploads/' . $produk['gambar']);
+    }
+
+    $stmt = $conn->prepare("DELETE FROM produk WHERE id = ?");
+    $stmt->execute([$id]);
+
+    $_SESSION['pesan'] = "Produk berhasil dihapus!";
+    $_SESSION['tipe'] = "success";
+    header("Location: index.php?page=data_barang");
+    exit;
+} else {
+    // Jika bukan method POST, redirect
+    header("Location: index.php?page=data_barang");
+    exit;
 }
-
-$stmt = $conn->prepare("DELETE FROM produk WHERE id = ?");
-$stmt->execute([$id]);
-
-header("Location: index.php?page=data_barang");
-exit;
 ?>

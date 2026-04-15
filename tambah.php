@@ -1,5 +1,7 @@
 <?php
+// menyambungkan ke sistem keamanan csrf.php
 session_start();
+include 'csrf.php';
 
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
@@ -19,6 +21,11 @@ $stok = '';
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // validasi csrf
+    if (!isset($_POST['csrf_token']) || !validateCSRFToken($_POST['csrf_token'])) {
+    die("Akses tidak sah (CSRF)");
+    }
+
     // Ambil data dari form
     $kode_produk = trim($_POST['kode_produk']);
     $nama_produk = trim($_POST['nama_produk']);
@@ -26,34 +33,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $harga = trim($_POST['harga']);
     $stok = trim($_POST['stok']);
     
-    // ========== VALIDASI SISI SERVER ==========
     $errors = [];
     
-    // 1. Nama produk tidak boleh kosong
+    // nama produk tidak boleh kosong
     if (empty($nama_produk)) {
         $errors[] = "Nama produk wajib diisi.";
     }
     
-    // 2. Harga harus numerik dan tidak negatif
+    // harga harus numerik dan tidak negatif
     if (!is_numeric($harga) || $harga < 0) {
         $errors[] = "Harga harus berupa angka positif.";
     }
     
-    // 3. Stok harus numerik dan tidak negatif
+    // stok harus numerik dan tidak negatif
     if (!is_numeric($stok) || $stok < 0) {
         $errors[] = "Stok harus berupa angka positif.";
     }
     
-    // 4. Kategori harus dipilih
+    // kategori harus dipilih
     if (empty($kategori_id)) {
         $errors[] = "Kategori wajib dipilih.";
     }
     
-    // ========== PROSES UPLOAD GAMBAR ==========
     $gambar_name = null;
     $upload_dir = 'uploads/';
     
-    // Pastikan folder uploads ada
+    // memastikan folder uploads ada
     if (!is_dir($upload_dir)) {
         mkdir($upload_dir, 0755, true);
     }
@@ -162,6 +167,7 @@ include 'includes/header.php';
                     <?php endif; ?>
                     
                     <form method="POST" enctype="multipart/form-data" class="form-vertical">
+                        <?php echo getCSRFField(); ?>
                         <div class="form-row">
                             <div class="form-group">
                                 <label><i class="fas fa-barcode"></i> Kode Produk</label>
