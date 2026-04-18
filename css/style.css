@@ -699,3 +699,23 @@ body{
 .register-footer a:hover{
     text-decoration:underline;
 }
+
+/* tombol hapus */
+.aksi button.btn-delete {
+    background: #F2AEBB;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s;
+}
+
+.aksi button.btn-delete:hover {
+    transform: scale(1.05);
+    background: #e79cab;
+}

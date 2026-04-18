@@ -5,7 +5,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 include 'koneksi.php';
-include '../../csrf.php';  
+include 'csrf.php';
 
 $query = $conn->query("SELECT * FROM produk ORDER BY id DESC");
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -62,14 +62,19 @@ $result = $query->fetchAll(PDO::FETCH_ASSOC);
                         <span class="stok-badge <?php echo $class; ?>"><?php echo $row['stok']; ?></span>
                     </td>
                     <td class="aksi">
+                        <!-- edit -->
                         <a href="edit.php?id=<?php echo $row['id']; ?>" class="btn-edit"><i class="fas fa-pen"></i></a>
-                        <form method="POST" action="hapus.php" style="display:inline;" onsubmit="return confirm('Yakin hapus barang ini?')">
+                        
+                        <!-- hapus -->
+                        <a href="#" class="btn-delete" onclick="event.preventDefault(); document.getElementById('hapus-form-<?php echo $row['id']; ?>').submit();">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                        <form id="hapus-form-<?php echo $row['id']; ?>" method="POST" action="hapus.php" style="display:none;">
                             <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                             <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
-                            <button type="submit" class="btn-delete" style="background:none; border:none; cursor:pointer;">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </form>                        
+                        </form>
+                        
+                        <!-- detail -->
                         <a href="detail.php?id=<?php echo $row['id']; ?>" class="btn-view"><i class="fas fa-eye"></i></a>
                     </td>
                 </tr>
