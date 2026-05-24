@@ -1,131 +1,54 @@
-<?php
-session_start();
+<?php require __DIR__ . '/../templates/header.php'; ?>
 
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
-    exit;
-}
+<main class="main-content">
+    <div class="page-header">
+        <h2>Detail Produk</h2>
+        <div class="breadcrumb">
+            <a href="index.php?url=produk/index">Data Barang</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>Detail Produk</span>
+        </div>
+    </div>
 
-include 'koneksi.php';
-?>
+    <div class="card detail-card">
+        <div class="card-header">
+            <h3>Informasi Lengkap Produk</h3>
+            <a href="index.php?url=produk/index" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Kembali</a>
+        </div>
+        <div class="card-body detail-layout">
+            <div class="detail-image">
+                <?php $imagePath = __DIR__ . '/../../../public/uploads/' . ($produk['gambar'] ?? ''); ?>
+                <?php if (!empty($produk['gambar']) && is_file($imagePath)): ?>
+                    <img src="/crud_mvc/public/uploads/<?= e($produk['gambar']); ?>" alt="<?= e($produk['nama_produk']); ?>">
+                <?php else: ?>
+                    <div class="empty-image"><i class="fas fa-image"></i><span>Tidak ada gambar</span></div>
+                <?php endif; ?>
+            </div>
 
-<?php
-	include 'koneksi.php';
-	$page_title = "Detail Produk";
-	$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-	$stmt = $conn->prepare("SELECT * FROM produk WHERE id = ?");
-	$stmt->execute([$id]);
-	$produk = $stmt->fetch(PDO::FETCH_ASSOC);
+            <div class="detail-fields">
+                <div class="detail-item">
+                    <span>Kode Produk</span>
+                    <strong><?= e($produk['kode_produk']); ?></strong>
+                </div>
+                <div class="detail-item">
+                    <span>Nama Produk</span>
+                    <strong><?= e($produk['nama_produk']); ?></strong>
+                </div>
+                <div class="detail-item">
+                    <span>Kategori</span>
+                    <strong><?= e($produk['kategori_id']); ?></strong>
+                </div>
+                <div class="detail-item">
+                    <span>Harga</span>
+                    <strong>Rp <?= number_format((float) $produk['harga'], 0, ',', '.'); ?></strong>
+                </div>
+                <div class="detail-item">
+                    <span>Stok</span>
+                    <strong><?= e($produk['stok']); ?></strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 
-
-	if (!$produk) {
-		$_SESSION['pesan'] = "Produk tidak ditemukan!";
-		$_SESSION['tipe']  = "error";
-		header("Location: index.php?page=data_barang");
-		exit();
-	}
-?>
-
-<?php include 'includes/header.php'; ?>
-
-<div class="content-wrapper">
-	<main class="main-content">
-		<div class="page-header">
-			<h2>Detail Produk</h2>
-			<div class="breadcrumb">
-				<a href="index.php?page=data_barang">Data Barang</a>
-				<i class="fas fa-chevron-right"></i>
-				<span>Detail Produk</span>
-			</div>
-		</div>
-
-		<div class="content">
-			<div class="card">
-				<div class="card-header">
-					<h3>Informasi Lengkap Produk</h3>
-					<a href="index.php?page=data_barang" class="btn btn-secondary">
-						<i class="fas fa-arrow-left"></i> Kembali
-					</a>
-				</div>
-
-				<div class="card-body">
-					<form class="form-vertical">
-						<div class="form-row">
-							<div class="form-group">
-								<label>
-									<i class="fas fa-barcode"></i> Kode Produk
-								</label>
-								<input
-									type="text"
-									value="<?php echo htmlspecialchars($produk['kode_produk']); ?>"
-									disabled
-								>
-							</div>
-
-							<div class="form-group">
-								<label>
-									<i class="fas fa-box"></i> Nama Produk
-								</label>
-								<input
-									type="text"
-									value="<?php echo htmlspecialchars($produk['nama_produk']); ?>"
-									disabled
-								>
-							</div>
-						</div>
-
-						<div class="form-row">
-							<div class="form-group">
-								<label>
-									<i class="fas fa-tags"></i> Kategori
-								</label>
-								<input
-									type="text"
-									value="<?php echo htmlspecialchars($produk['kategori_id']); ?>"
-									disabled
-								>
-							</div>
-						</div>
-
-						<div class="form-row">
-							<div class="form-group">
-								<label>
-									<i class="fas fa-money-bill-wave"></i> Harga
-								</label>
-								<input
-									type="text"
-									value="Rp <?php echo number_format($produk['harga'],0,',','.'); ?>"
-									disabled
-								>
-							</div>
-
-							<div class="form-group">
-								<label>
-									<i class="fas fa-cubes"></i> Stok
-								</label>
-								<input
-									type="number"
-									value="<?php echo $produk['stok']; ?>"
-									disabled
-								>
-							</div>
-
-							<div class="form-row">
-
-							<div class="form-group">
-								<label><i class="fas fa-image"></i> Gambar Produk</label>
-								<?php if ($produk['gambar'] && file_exists('uploads/' . $produk['gambar'])): ?>
-									<div>
-										<img src="uploads/<?php echo $produk['gambar']; ?>" style="max-width:200px; border-radius:8px;">
-									</div>
-								<?php else: ?>
-									<p><em>Tidak ada gambar</em></p>
-								<?php endif; ?>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</main>
-</div>
+<?php require __DIR__ . '/../templates/footer.php'; ?>
