@@ -1,11 +1,14 @@
 <?php
-	session_start();
+$host = 'localhost';
+$dbname = 'crud_db';
+$user = 'root';
+$pass = '';
 
-	session_unset();
-	session_destroy();
-
-	setcookie("username", "", time() - 3600, "/crud/");
-	header("Location: login.php");
-	
-	exit();
-?>
+try {
+    $conn = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    return $conn;
+} catch (PDOException $e) {
+    die('Koneksi database gagal: ' . $e->getMessage());
+}
