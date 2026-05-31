@@ -297,6 +297,17 @@ a {
     vertical-align: middle;
 }
 
+.inventory-table .image-column,
+.inventory-table .image-cell {
+    width: 80px;
+    min-width: 80px;
+    text-align: center;
+}
+
+.inventory-table .image-cell {
+    padding: 10px 12px;
+}
+
 .inventory-table tbody tr:nth-child(even) {
     background: #f9f9ff;
 }
@@ -306,15 +317,29 @@ a {
 }
 
 .product-thumb {
-    width: 54px;
-    height: 54px;
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto;
     object-fit: cover;
-    border-radius: 12px;
+    border-radius: 10px;
+    border: 1px solid #eeeeF6;
+    background: #f9f9ff;
 }
 
 .no-image {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    min-height: 44px;
+    padding: 6px;
+    border-radius: 10px;
+    background: #f9f9ff;
     color: #8b8db2;
-    font-size: 13px;
+    font-size: 12px;
+    line-height: 1.2;
+    text-align: center;
 }
 
 .kode {

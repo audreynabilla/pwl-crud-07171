@@ -60,7 +60,7 @@
                         <label><i class="fas fa-image"></i> Gambar Saat Ini</label>
                         <?php $imagePath = __DIR__ . '/../../../public/uploads/' . ($produk['gambar'] ?? ''); ?>
                         <?php if (!empty($produk['gambar']) && is_file($imagePath)): ?>
-                            <div class="image-preview"><img src="/crud_mvc/public/uploads/<?= e($produk['gambar']); ?>" alt="<?= e($produk['nama_produk']); ?>"></div>
+                            <div class="image-preview"><img src="/crud/public/uploads/<?= e($produk['gambar']); ?>" alt="<?= e($produk['nama_produk']); ?>"></div>
                         <?php else: ?>
                             <p><em>Tidak ada gambar</em></p>
                         <?php endif; ?>

@@ -40,7 +40,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Gambar</th>
+                        <th class="image-column">Gambar</th>
                         <th>Kode</th>
                         <th>Nama</th>
                         <th>Kategori</th>
@@ -63,9 +63,9 @@
                             ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td>
+                                <td class="image-cell">
                                     <?php if (!empty($row['gambar']) && is_file($imagePath)): ?>
-                                        <img src="/crud_mvc/public/uploads/<?= e($row['gambar']); ?>" class="product-thumb" alt="<?= e($row['nama_produk']); ?>">
+                                        <img src="/crud/public/uploads/<?= e($row['gambar']); ?>" class="product-thumb" alt="<?= e($row['nama_produk']); ?>">
                                     <?php else: ?>
                                         <span class="no-image">No Image</span>
                                     <?php endif; ?>

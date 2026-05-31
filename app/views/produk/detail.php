@@ -19,7 +19,7 @@
             <div class="detail-image">
                 <?php $imagePath = __DIR__ . '/../../../public/uploads/' . ($produk['gambar'] ?? ''); ?>
                 <?php if (!empty($produk['gambar']) && is_file($imagePath)): ?>
-                    <img src="/crud_mvc/public/uploads/<?= e($produk['gambar']); ?>" alt="<?= e($produk['nama_produk']); ?>">
+                    <img src="/crud/public/uploads/<?= e($produk['gambar']); ?>" alt="<?= e($produk['nama_produk']); ?>">
                 <?php else: ?>
                     <div class="empty-image"><i class="fas fa-image"></i><span>Tidak ada gambar</span></div>
                 <?php endif; ?>
