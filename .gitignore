@@ -1,0 +1,28 @@
+# Database configuration with local credentials
+config/database.php
+api/koneksi.php
+
+# Temporary and test files
+hash_old_users.php
+test.php
+*.tmp
+*.bak
+*.swp
+
+# Runtime uploads
+public/uploads/*
+
+# Logs
+*.log
+logs/
+log/
+
+# IDE and OS files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Dependency folders, if added later
+vendor/
+node_modules/
