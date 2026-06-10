@@ -72,14 +72,4 @@ crud/
 
 File konfigurasi database seperti `config/database.php` dan `api/koneksi.php` tidak disertakan ke repository karena berisi kredensial lokal. Pastikan file tersebut dibuat dan dikonfigurasi secara manual setelah clone proyek.
 
-## Panduan Commit Tugas 6
 
-Contoh pesan commit yang disarankan:
-
-```bash
-git add .gitignore README.md
-git commit -m "docs: add portfolio README and gitignore"
-git push origin main
-```
-
-Jika repository menggunakan branch `master`, ganti `main` menjadi `master`.
